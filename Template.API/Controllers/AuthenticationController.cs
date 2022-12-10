@@ -1,6 +1,5 @@
 ﻿using Business.Abstract;
 using DataAccess.Dtos;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Template.API.Controllers
