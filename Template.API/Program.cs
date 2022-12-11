@@ -6,6 +6,9 @@ using Core.Utilities.Security.Token.Jwt;
 using DataAccess.Abstracts;
 using DataAccess.Concreate.Contexts;
 using DataAccess.Concreate.Repositories;
+using Microsoft.Extensions.Configuration;
+using Serilog;
+using System.Configuration;
 using Template.API.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -42,6 +45,11 @@ builder.Services.AddScoped<Business.Abstract.IAuthenticationService, Business.Co
 builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
+
+Log.Logger = new LoggerConfiguration()
+.Enrich.FromLogContext()
+        .ReadFrom.Configuration(builder.Configuration)
+        .CreateLogger();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

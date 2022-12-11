@@ -1,4 +1,5 @@
 ﻿using Core.Utilities.Responses;
+using Serilog;
 using System.Text.Json;
 
 namespace Template.API.Middlewares
@@ -20,6 +21,8 @@ namespace Template.API.Middlewares
                     _ => StatusCodes.Status500InternalServerError,
                 };
                 var responseModel = new BaseResponseModel<object>(ex.Message);
+                Log.Error(ex,ex.Message);
+                Console.WriteLine(ex);
                 await context.Response.WriteAsync(JsonSerializer.Serialize(responseModel));
             }
         }
