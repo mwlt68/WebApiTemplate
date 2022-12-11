@@ -6,10 +6,13 @@ using Core.Utilities.Security.Token.Jwt;
 using DataAccess.Abstracts;
 using DataAccess.Concreate.Contexts;
 using DataAccess.Concreate.Repositories;
+using Template.API.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddCors();
+
+builder.Services.AddTransient<ExceptionHandlerMiddleware>();
 
 var jwtSettingsSection = builder.Configuration.GetSection("JwtSettings");
 builder.Services.Configure<JwtSettings>(jwtSettingsSection);
@@ -48,6 +51,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.UseAuthorization();
 

@@ -29,7 +29,7 @@ namespace Business.Concreate
                 userLoginDto.Token = jwtService.CreateToken(user.Id);
                 return new BaseResponseModel<UserLoginResponseDto>(userLoginDto);
             }
-            else return new BaseResponseModel<UserLoginResponseDto>("Username or password wrong !");
+            else throw new KeyNotFoundException("Username or password wrong !");
         }
     }
 }
