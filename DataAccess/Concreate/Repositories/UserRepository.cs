@@ -19,5 +19,11 @@ namespace DataAccess.Concreate.Repositories
                 .FirstOrDefaultAsync(u => u.Username == username && u.Password == hashedPassword);
         }
 
+        public async Task<bool> UsernameIsUniqueAsync(string username)
+        {
+            bool isExist = await context.Users
+                .AnyAsync(u => u.Username == username);
+            return !isExist;
+        }
     }
 }

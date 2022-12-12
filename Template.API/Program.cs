@@ -1,3 +1,5 @@
+using Business.Abstract;
+using Business.Concreate;
 using Business.Mapping;
 using Business.Validations;
 using Core.Extensions;
@@ -41,6 +43,8 @@ builder.Services.AddTransient<ICacheService, MemoryCacheService>();
 builder.Services.AddSingleton<IJwtService, JwtService>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddScoped<Business.Abstract.IAuthenticationService, Business.Concreate.AuthenticationService>();
 

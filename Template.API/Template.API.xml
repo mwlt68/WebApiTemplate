@@ -15,5 +15,16 @@
             <response code="200">Returns user data and token.</response>
             
         </member>
+        <member name="M:Template.API.Controllers.UsersController.RegisterationAsync(DataAccess.Dtos.UserInsertDto)">
+            <summary>
+            User registration.
+            </summary>
+            <remarks>
+            The user registers the program and receives the JWT(token)is used for system authentication.
+            </remarks>
+            <param name="model"></param>
+            <response code="200">Returns user data and token.</response>
+            
+        </member>
     </members>
 </doc>
