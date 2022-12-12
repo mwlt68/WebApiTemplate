@@ -5,6 +5,6 @@ namespace Business.Abstract
 {
     public interface IAuthenticationService
     {
-        public Task<BaseResponseModel<UserLoginResponseDto>> AuthenticateAsync(string username, string password);
+        public Task<DataResponseModel<UserLoginResponseDto>> AuthenticateAsync(string username, string password);
     }
 }

@@ -20,7 +20,7 @@ namespace Template.API.Middlewares
                     KeyNotFoundException => StatusCodes.Status404NotFound,
                     _ => StatusCodes.Status500InternalServerError,
                 };
-                var responseModel = new BaseResponseModel<object>(ex.Message);
+                var responseModel = new BaseResponseModel(ex.Message);
                 Log.Error(ex,ex.Message);
                 Console.WriteLine(ex);
                 await context.Response.WriteAsync(JsonSerializer.Serialize(responseModel));

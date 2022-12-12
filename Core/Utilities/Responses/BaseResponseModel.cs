@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Core.Utilities.Responses
+﻿namespace Core.Utilities.Responses
 {
-    public class BaseResponseModel<T>
+    public class BaseResponseModel
     {
-        public BaseResponseModel(T result, bool hasException = false, string exceptionContent = null)
+        public BaseResponseModel(bool hasException = false, string? exceptionContent = null)
         {
-            this.result = result;
             this.hasException = hasException;
             this.exceptionContent = exceptionContent;
         }
@@ -24,9 +17,19 @@ namespace Core.Utilities.Responses
             hasException = true;
             exceptionContent = exception.Message;
         }
-        public T? result { get; set; }
         public bool hasException { get; set; }
-        public string exceptionContent { get; set; }
+        public string? exceptionContent { get; set; }
     }
+
+    public class DataResponseModel<T> : BaseResponseModel
+    {
+        public T result { get; set; }
+        public DataResponseModel(T result, bool hasException = false, string? exceptionContent = null) :base(hasException,exceptionContent)
+        {
+            this.result = result;
+            this.hasException = hasException;
+            this.exceptionContent = exceptionContent;
+        }
+    } 
 
 }
