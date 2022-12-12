@@ -20,7 +20,7 @@
             User registration.
             </summary>
             <remarks>
-            The user registers the program and receives the JWT(token)is used for system authentication.
+            The user registers in the program. Retrieves the JWT (token) used for system authentication.
             </remarks>
             <param name="model"></param>
             <response code="200">Returns user data and token.</response>
