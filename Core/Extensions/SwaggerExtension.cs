@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
+using System.Reflection;
 
 namespace Core.Extensions
 {
@@ -35,6 +37,11 @@ namespace Core.Extensions
                         { jwtSecurityScheme, Array.Empty<string>() }
                     }
                 );
+
+                string xmlFile = $"{Assembly.GetEntryAssembly()?.GetName().Name}.xml";
+                string xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath, includeControllerXmlComments: true);
+                c.OperationFilter<AppendAuthorizeToSummaryOperationFilter>();
             });
         }
     }
