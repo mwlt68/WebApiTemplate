@@ -28,14 +28,13 @@ namespace Template.API.Controllers
         /// <response code="200">Returns user data and token.</response>
         /// 
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(DataResponseModel<UserLoginResponseDto>))]
-        [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(BaseResponseModel))]
         [SwaggerResponse(StatusCodes.Status404NotFound, Type = typeof(BaseResponseModel))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(BaseResponseModel))]
 
         [HttpPost("login")]
         public async Task<IActionResult> LoginAsync([FromBody] UserLoginRequestDto model)
         {
-            var authenticateResult = await authenticationService.AuthenticateAsync(model.username, model.password);
+            var authenticateResult = await authenticationService.AuthenticateAsync(model.Username, model.Password);
             return Ok(authenticateResult);
         }
     }

@@ -1,4 +1,5 @@
 using Business.Mapping;
+using Business.Validations;
 using Core.Extensions;
 using Core.Utilities.Cache.Base;
 using Core.Utilities.Cache.MemoryCache;
@@ -6,9 +7,9 @@ using Core.Utilities.Security.Token.Jwt;
 using DataAccess.Abstracts;
 using DataAccess.Concreate.Contexts;
 using DataAccess.Concreate.Repositories;
-using Microsoft.Extensions.Configuration;
+using DataAccess.Dtos;
+using FluentValidation;
 using Serilog;
-using System.Configuration;
 using Template.API.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +26,7 @@ builder.Services.Configure<CacheSettings>(cacheSettingsSection);
 
 builder.Services.AddDbContext<ApplicationDbContext>();
 builder.Services.AddControllers();
+builder.Services.AddValidatorsFromAssemblyContaining<UserLoginRequestDtoValidation>();
 builder.Services.AddCustomSwaggerGen();
 
 var jwtSettings = jwtSettingsSection.Get<JwtSettings>();
