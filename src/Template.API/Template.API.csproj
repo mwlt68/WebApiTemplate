@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <DocumentationFile>C:\Users\mwltg\source\repos\Custom\Template\Template.API\Template.API.xml</DocumentationFile>
+    <DocumentationFile>C:\Users\mwltg\source\repos\Custom\Template\src\Template.API\Template.API.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
