@@ -1,10 +1,10 @@
 ﻿using DataAccess.Consts;
-using DataAccess.Dtos;
+using DataAccess.Dtos.User;
 using FluentValidation;
 
-namespace Business.Validations
+namespace Business.Validations.User
 {
-    internal class UserInsertDtoValidation :  AbstractValidator<UserInsertDto>
+    internal class UserInsertDtoValidation : AbstractValidator<UserInsertDto>
     {
         public UserInsertDtoValidation()
         {
@@ -18,7 +18,7 @@ namespace Business.Validations
                 .NotNull()
                 .NotEmpty()
                 .WithMessage("Password cannot be left")
-                .Length(UserConsts.PasswordMinLength,UserConsts.PasswordMaxLength)
+                .Length(UserConsts.PasswordMinLength, UserConsts.PasswordMaxLength)
                 .WithMessage($"Your password name must be between {UserConsts.PasswordMinLength}-{UserConsts.PasswordMaxLength} characters !")
                 .Matches(@"[A-Z]+").WithMessage("Your password must contain at least one capital letter !")
                 .Matches(@"[a-z]+").WithMessage("Your password must contain at least one lowercase letter !")
