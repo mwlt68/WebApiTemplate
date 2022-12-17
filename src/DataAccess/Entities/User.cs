@@ -1,4 +1,4 @@
-﻿using Core.BaseEntities.Concreate;
+﻿using Core.BaseModels.EntityModels;
 
 namespace DataAccess.Entities
 {

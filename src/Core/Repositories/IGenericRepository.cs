@@ -1,4 +1,4 @@
-﻿using Core.BaseEntities.Abstract;
+﻿using Core.BaseModels.EntityModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

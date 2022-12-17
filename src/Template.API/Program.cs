@@ -1,7 +1,7 @@
 using Business.Abstract;
 using Business.Concreate;
 using Business.Mapping;
-using Business.Validations;
+using Business.Validations.User;
 using Core.Extensions;
 using Core.Utilities.Cache.Base;
 using Core.Utilities.Cache.MemoryCache;
@@ -9,8 +9,8 @@ using Core.Utilities.Security.Token.Jwt;
 using DataAccess.Abstracts;
 using DataAccess.Concreate.Contexts;
 using DataAccess.Concreate.Repositories;
-using DataAccess.Dtos;
 using FluentValidation;
+using FluentValidation.AspNetCore;
 using Serilog;
 using Template.API.Middlewares;
 
@@ -27,7 +27,9 @@ var cacheSettingsSection = builder.Configuration.GetSection("CacheSettings");
 builder.Services.Configure<CacheSettings>(cacheSettingsSection);
 
 builder.Services.AddDbContext<ApplicationDbContext>();
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<UserLoginRequestDtoValidation>());
+
 builder.Services.AddValidatorsFromAssemblyContaining<UserLoginRequestDtoValidation>();
 builder.Services.AddCustomSwaggerGen();
 
@@ -43,8 +45,10 @@ builder.Services.AddTransient<ICacheService, MemoryCacheService>();
 builder.Services.AddSingleton<IJwtService, JwtService>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 builder.Services.AddScoped<Business.Abstract.IAuthenticationService, Business.Concreate.AuthenticationService>();
 
@@ -68,6 +72,7 @@ app.UseHttpsRedirection();
 
 app.UseMiddleware<ExceptionHandlerMiddleware>();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
