@@ -30,7 +30,7 @@ namespace Template.API.Controllers
         [SwaggerResponse(StatusCodes.Status404NotFound, Type = typeof(BaseResponseModel))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(BaseResponseModel))]
 
-        [HttpPost("registeration")]
+        [HttpPost("registration")]
         public async Task<IActionResult> RegisterationAsync(UserInsertDto userInsertDto)
         {
             var userInsertResult = await userService.InsertAsync(userInsertDto);
