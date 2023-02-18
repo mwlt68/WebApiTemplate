@@ -12,6 +12,7 @@ using DataAccess.Concreate.Repositories;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Serilog;
+using Template.API.Interceptors;
 using Template.API.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,7 +28,9 @@ var cacheSettingsSection = builder.Configuration.GetSection("CacheSettings");
 builder.Services.Configure<CacheSettings>(cacheSettingsSection);
 
 builder.Services.AddDbContext<ApplicationDbContext>();
-builder.Services.AddControllers()
+builder.Services
+    .AddControllers()
+    .AddConfigureApiBehaviorOptions()
     .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<UserLoginRequestDtoValidation>());
 
 builder.Services.AddValidatorsFromAssemblyContaining<UserLoginRequestDtoValidation>();
@@ -51,7 +54,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 
 builder.Services.AddScoped<Business.Abstract.IAuthenticationService, Business.Concreate.AuthenticationService>();
-
+builder.Services.AddTransient<IValidatorInterceptor, UseCustomErrorModelInterceptor>();
 builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
@@ -67,7 +70,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors(x => x
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader());
+    
 app.UseHttpsRedirection();
 
 app.UseMiddleware<ExceptionHandlerMiddleware>();
