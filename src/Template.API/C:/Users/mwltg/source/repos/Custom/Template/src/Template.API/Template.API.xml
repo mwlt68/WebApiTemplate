@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Template.API</name>
+    </assembly>
+    <members>
+        <member name="M:Template.API.Controllers.AuthenticationController.LoginAsync(DataAccess.Dtos.User.UserLoginRequestDto)">
+            <summary>
+            Get user data and jwt(token). 
+            </summary>
+            <remarks>
+            JWT(token)is used for system authentication.
+            </remarks>
+            <param name="model"></param>
+            <response code="200">Returns user data and token.</response>
+            
+        </member>
+        <member name="M:Template.API.Controllers.UsersController.RegisterationAsync(DataAccess.Dtos.User.UserInsertDto)">
+            <summary>
+            User registration.
+            </summary>
+            <remarks>
+            The user registers in the program. Retrieves the JWT (token) used for system authentication.
+            </remarks>
+            <param name="model"></param>
+            <response code="200">Returns user data and token.</response>
+            
+        </member>
+    </members>
+</doc>
