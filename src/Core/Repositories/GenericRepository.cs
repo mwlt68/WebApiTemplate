@@ -40,11 +40,13 @@ namespace Core.Repositories
         public async Task<bool> DeleteAsync(int id)
         {
             var deleteEntity = await context.Set<TEntity>().FindAsync(id);
-            context.Set<TEntity>().Remove(deleteEntity);
-            var data = await context.SaveChangesAsync();
-            if (data > 0)
-                return true;
-            return false;
+            if(deleteEntity != null)
+            {
+                context.Set<TEntity>().Remove(deleteEntity);
+                var data = await context.SaveChangesAsync();
+                return data > 0;
+            }
+            else throw new  KeyNotFoundException("Not found !");
         }
     }
 }
