@@ -23,7 +23,7 @@ namespace Template.API.Controllers
         /// <remarks>
         /// The user registers in the program. Retrieves the JWT (token) used for system authentication.
         /// </remarks>
-        /// <param name="model"></param>
+        /// <param name="userInsertDto"></param>
         /// <response code="200">Returns user data and token.</response>
         /// 
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(DataResponseModel<UserLoginResponseDto>))]
