@@ -4,16 +4,19 @@ using FluentValidation;
 
 namespace Business.Validations.User
 {
-    internal class UserInsertDtoValidation : AbstractValidator<UserInsertDto>
+    public class UserInsertDtoValidation : AbstractValidator<UserInsertDto>
     {
         public UserInsertDtoValidation()
         {
+            RuleLevelCascadeMode = CascadeMode.Stop;
+            
             RuleFor(x => x.Username)
                 .NotNull()
                 .NotEmpty()
                 .WithMessage("Username cannot be left")
                 .Length(UserConsts.UserNameMinLength, UserConsts.UserNameMaxLength)
-                .WithErrorCode($"Username must be between {UserConsts.UserNameMinLength}-{UserConsts.UserNameMaxLength} characters !");
+                .WithMessage($"Username must be between {UserConsts.UserNameMinLength}-{UserConsts.UserNameMaxLength} characters !");
+
             RuleFor(x => x.Password)
                 .NotNull()
                 .NotEmpty()

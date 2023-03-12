@@ -7,6 +7,8 @@ namespace Business.Validations.User
     {
         public UserLoginRequestDtoValidation()
         {
+            RuleLevelCascadeMode = CascadeMode.Stop;
+            
             RuleFor(x => x.Username)
                 .NotEmpty()
                 .NotNull()
