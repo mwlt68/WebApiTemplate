@@ -26,7 +26,7 @@ namespace Template.API.Controllers
         }
 
         [HttpGet()]
-        public async Task<ActionResult> GetAllAsync([FromQuery] int id)
+        public async Task<ActionResult> GetByIdAsync([FromQuery] int id)
         {
             var product = await productService.GetByIdAsync(id);
             if (product != null)
@@ -39,7 +39,7 @@ namespace Template.API.Controllers
         }
 
         [HttpPost("insert")]
-        public async Task<ActionResult> InsertAsync(ProductInsertDto productInsertDto)
+        public async Task<ActionResult> InsertAsync([FromForm] ProductInsertDto productInsertDto)
         {
             var product = await productService.Insert(productInsertDto);
             var response = new DataResponseModel<ProductResponseDto>(product);
@@ -47,7 +47,7 @@ namespace Template.API.Controllers
         }
 
         [HttpPut("update")]
-        public async Task<ActionResult> UpdateAsync(ProductUpdateDto productUpdateDto)
+        public async Task<ActionResult> UpdateAsync([FromForm] ProductUpdateDto productUpdateDto)
         {
             var product = await productService.Update(productUpdateDto);
             var response = new DataResponseModel<ProductResponseDto>(product);

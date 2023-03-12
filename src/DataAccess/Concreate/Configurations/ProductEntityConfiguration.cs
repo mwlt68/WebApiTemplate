@@ -2,11 +2,6 @@
 using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.Concreate.Configurations
 {
@@ -42,6 +37,12 @@ namespace DataAccess.Concreate.Configurations
             builder.Property((Product p) => p.CreateDateTime)
                 .HasColumnName("createDateTime")
                 .HasDefaultValueSql("getdate()");
+
+            builder.Property((Product p) => p.Image)
+                .HasColumnName("image");
+
+            builder.Property((Product p) => p.ImageType)
+                .HasColumnName("imageType");
         }
     }
 }

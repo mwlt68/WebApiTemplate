@@ -2,7 +2,7 @@
 
 namespace DataAccess.Dtos.Base
 {
-    public abstract class ProductBaseDto :BaseDto
+    public abstract class ProductBaseDto : BaseDto
     {
         public string Name { get; set; }
         public string Brand { get; set; }

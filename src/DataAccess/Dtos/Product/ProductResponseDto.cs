@@ -7,6 +7,7 @@ namespace DataAccess.Dtos.Product
     {
         public int Id { get; set; }
         public int StockQuantity { get; set; }
-
+        public byte[]? Image {get;set;}
+        public string? ImageType {get;set;}
     }
 }
