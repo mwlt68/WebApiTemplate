@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  template-api:
+    build: .
+    ports:
+      - "3005:80"
+  template-db:
+    image: "mcr.microsoft.com/mssql/server"
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Mevlut123
+    ports:
+      - 1433:1433
+    volumes:
+      - template-data:/var/opt/mssql
+volumes:
+  template-data:
