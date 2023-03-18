@@ -37,9 +37,9 @@ namespace Core.Repositories
             return entity;
         }
 
-        public async Task<bool> DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(Expression<Func<TEntity, bool>> filter)
         {
-            var deleteEntity = await context.Set<TEntity>().FindAsync(id);
+            var deleteEntity = await GetAsync(filter);
             if(deleteEntity != null)
             {
                 context.Set<TEntity>().Remove(deleteEntity);

@@ -18,6 +18,6 @@ namespace Core.Repositories
 
         Task<TEntity> UpdateAsync(TEntity entity);
 
-        Task<bool> DeleteAsync(int id);
+        Task<bool> DeleteAsync(Expression<Func<TEntity, bool>> filter);
     }
 }
