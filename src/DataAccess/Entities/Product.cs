@@ -12,5 +12,7 @@ namespace DataAccess.Entities
         public byte[]? Image {get;set;}
         public string? ImageType {get;set;}
         public DateTime CreateDateTime { get; set; }
+        public int UserId { get; set; }
+        public User User { get; set; }
     }
 }

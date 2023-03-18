@@ -27,6 +27,10 @@ namespace DataAccess.Concreate.Contexts
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
             modelBuilder.ApplyConfiguration(new ProductEntityConfiguration());
+            modelBuilder.Entity<Product>()
+                .HasOne(p => p.User)
+                .WithMany(u => u.Products)
+                .HasForeignKey(p => p.UserId);
 
         }
         public virtual DbSet<User> Users { get; set; }
