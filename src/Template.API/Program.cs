@@ -16,7 +16,8 @@ using Template.API.Interceptors;
 using Template.API.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddTransient<IHttpContextService, HttpContextService>();
 builder.Services.AddCors();
 
 builder.Services.AddTransient<ExceptionHandlerMiddleware>();
