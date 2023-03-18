@@ -1,4 +1,4 @@
-﻿using Core.BaseEntities.Abstract;
+﻿using Core.BaseModels.EntityModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +18,6 @@ namespace Core.Repositories
 
         Task<TEntity> UpdateAsync(TEntity entity);
 
-        Task<bool> DeleteAsync(int id);
+        Task<bool> DeleteAsync(Expression<Func<TEntity, bool>> filter);
     }
 }

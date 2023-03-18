@@ -1,6 +1,6 @@
 ﻿using Business.Abstract;
 using Core.Utilities.Responses;
-using DataAccess.Dtos;
+using DataAccess.Dtos.User;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 

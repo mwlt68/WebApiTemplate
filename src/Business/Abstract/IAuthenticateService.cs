@@ -1,5 +1,5 @@
 ﻿using Core.Utilities.Responses;
-using DataAccess.Dtos;
+using DataAccess.Dtos.User;
 
 namespace Business.Abstract
 {
