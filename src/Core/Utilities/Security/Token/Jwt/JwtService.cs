@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Core.Consts;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -18,7 +19,7 @@ namespace Core.Utilities.Security.Token.Jwt
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             var claims = new[] {
-                new Claim(ClaimTypes.NameIdentifier, Convert.ToString(userId)),
+                new Claim(ClaimConsts.UserIdClaim, Convert.ToString(userId)),
                 };
             var token = new JwtSecurityToken(
                 claims: claims,
