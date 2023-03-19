@@ -3,7 +3,7 @@ using Business.Abstract;
 using Core.Utilities.Responses;
 using Core.Utilities.Security.Token.Jwt;
 using DataAccess.Abstracts;
-using DataAccess.Dtos.User;
+using DataAccess.Dtos;
 using DataAccess.Entities;
 
 namespace Business.Concreate

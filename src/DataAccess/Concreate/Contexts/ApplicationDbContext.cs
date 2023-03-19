@@ -2,6 +2,11 @@
 using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace DataAccess.Concreate.Contexts
 {
@@ -26,15 +31,9 @@ namespace DataAccess.Concreate.Contexts
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
-            modelBuilder.ApplyConfiguration(new ProductEntityConfiguration());
-            modelBuilder.Entity<Product>()
-                .HasOne(p => p.User)
-                .WithMany(u => u.Products)
-                .HasForeignKey(p => p.UserId);
 
         }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
 
     }
 }

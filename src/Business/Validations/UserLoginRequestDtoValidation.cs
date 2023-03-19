@@ -1,21 +1,19 @@
-﻿using DataAccess.Dtos.User;
+﻿using DataAccess.Dtos;
 using FluentValidation;
 
-namespace Business.Validations.User
+namespace Business.Validations
 {
     public class UserLoginRequestDtoValidation : AbstractValidator<UserLoginRequestDto>
     {
         public UserLoginRequestDtoValidation()
         {
-            RuleLevelCascadeMode = CascadeMode.Stop;
-            
             RuleFor(x => x.Username)
-                .NotEmpty()
                 .NotNull()
+                .NotEmpty()
                 .WithMessage("Username cannot be left !");
             RuleFor(x => x.Password)
-                .NotEmpty()
                 .NotNull()
+                .NotEmpty()
                 .WithMessage("Password cannot be left !");
         }
     }

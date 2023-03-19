@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Dtos.User
+namespace DataAccess.Dtos
 {
-    public class UserInsertDto
+    public class UserLoginResponseDto
     {
+        public int Id { get; set; }
         public string Username { get; set; }
-        public string Password { get; set; }
+        public string Token { get; set; }
     }
 }

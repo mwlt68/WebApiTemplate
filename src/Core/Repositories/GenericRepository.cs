@@ -1,4 +1,4 @@
-﻿using Core.BaseModels.EntityModels;
+﻿using Core.BaseEntities.Abstract;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -37,16 +37,14 @@ namespace Core.Repositories
             return entity;
         }
 
-        public async Task<bool> DeleteAsync(Expression<Func<TEntity, bool>> filter)
+        public async Task<bool> DeleteAsync(int id)
         {
-            var deleteEntity = await GetAsync(filter);
-            if(deleteEntity != null)
-            {
-                context.Set<TEntity>().Remove(deleteEntity);
-                var data = await context.SaveChangesAsync();
-                return data > 0;
-            }
-            else throw new  KeyNotFoundException("Not found !");
+            var deleteEntity = await context.Set<TEntity>().FindAsync(id);
+            context.Set<TEntity>().Remove(deleteEntity);
+            var data = await context.SaveChangesAsync();
+            if (data > 0)
+                return true;
+            return false;
         }
     }
 }

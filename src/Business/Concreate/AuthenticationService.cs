@@ -4,7 +4,7 @@ using Core.Utilities.Helpers;
 using Core.Utilities.Responses;
 using Core.Utilities.Security.Token.Jwt;
 using DataAccess.Abstracts;
-using DataAccess.Dtos.User;
+using DataAccess.Dtos;
 
 namespace Business.Concreate
 {

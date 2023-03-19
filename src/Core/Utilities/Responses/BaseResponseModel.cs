@@ -23,8 +23,8 @@
 
     public class DataResponseModel<T> : BaseResponseModel
     {
-        public T? result { get; set; }
-        public DataResponseModel(T? result, bool hasException = false, string? exceptionContent = null) :base(hasException,exceptionContent)
+        public T result { get; set; }
+        public DataResponseModel(T result, bool hasException = false, string? exceptionContent = null) :base(hasException,exceptionContent)
         {
             this.result = result;
             this.hasException = hasException;

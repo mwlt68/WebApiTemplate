@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Dtos.User
+namespace DataAccess.Dtos
 {
     public class UserLoginRequestDto
     {
         public string Username { get; set; }
         public string Password { get; set; }
 
-        public UserLoginRequestDto(string username, string password)
+        public UserLoginRequestDto(string username,string password)
         {
             Password = password;
             Username = username;

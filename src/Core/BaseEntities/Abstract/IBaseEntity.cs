@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.BaseModels
+namespace Core.BaseEntities.Abstract
 {
-    public interface IIdenticalModel
+    public interface IBaseEntity
     {
-        public int Id { get; set; }
+        int Id { get; set; }
     }
 }
