@@ -3,7 +3,8 @@ services:
   template-api:
     build: .
     ports:
-      - "3005:80"
+      - "3006:80"
+      - "3007:443"
   template-db:
     image: "mcr.microsoft.com/mssql/server"
     environment:
