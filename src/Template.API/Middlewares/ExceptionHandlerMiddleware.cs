@@ -1,6 +1,7 @@
-﻿using Core.Utilities.Responses;
-using Serilog;
-using System.Text.Json;
+﻿using Core.Exceptions;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using static Core.Models.BaseResponseModel;
 
 namespace Template.API.Middlewares
 {
@@ -15,15 +16,31 @@ namespace Template.API.Middlewares
             catch (Exception ex)
             {
                 context.Response.ContentType = "application/json";
-                context.Response.StatusCode = ex switch
+                ServiceResponse response = new ServiceResponse();
+                if (ex is CustomBaseException)
                 {
-                    KeyNotFoundException => StatusCodes.Status404NotFound,
-                    _ => StatusCodes.Status500InternalServerError,
-                };
-                var responseModel = new BaseResponseModel(ex.Message);
-                Log.Error(ex,ex.Message);
-                Console.WriteLine(ex);
-                await context.Response.WriteAsync(JsonSerializer.Serialize(responseModel));
+                    context.Response.StatusCode = ex switch
+                    {
+                        BadRequestException => StatusCodes.Status400BadRequest,
+                        NotFoundException => StatusCodes.Status404NotFound,
+                        InternalServerException => StatusCodes.Status500InternalServerError,
+                        _ => StatusCodes.Status500InternalServerError,
+                    };
+                    response.ErrorContents = ((CustomBaseException)ex).ErrorContents;
+                }
+                else
+                {
+                    context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+                    response.IsCustomException = false;
+                    response.ErrorContents = new List<ErrorResponseContent>()
+                    {
+                        new ErrorResponseContent("Exception",ex.Message)
+                    };
+                }
+                var serializerSettings = new JsonSerializerSettings();
+                serializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                var json = JsonConvert.SerializeObject(response, serializerSettings);
+                await context.Response.WriteAsync(json);
             }
         }
     }
