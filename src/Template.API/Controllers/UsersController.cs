@@ -1,8 +1,9 @@
 ﻿using Business.Abstract;
-using Core.Utilities.Responses;
+using Core.Models;
 using DataAccess.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using static Core.Models.BaseResponseModel;
 
 namespace Template.API.Controllers
 {
@@ -26,12 +27,12 @@ namespace Template.API.Controllers
         /// <param name="model"></param>
         /// <response code="200">Returns user data and token.</response>
         /// 
-        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(DataResponseModel<UserLoginResponseDto>))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(ServiceResponse<UserLoginResponseDto>))]
         [SwaggerResponse(StatusCodes.Status404NotFound, Type = typeof(BaseResponseModel))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(BaseResponseModel))]
 
         [HttpPost("registeration")]
-        public async Task<IActionResult> RegisterationAsync(UserInsertDto userInsertDto)
+        public async Task<IActionResult> RegisterationAsync([FromBody] UserInsertDto userInsertDto)
         {
             var userInsertResult = await userService.InsertAsync(userInsertDto);
             return Ok(userInsertResult);

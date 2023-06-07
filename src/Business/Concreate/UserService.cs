@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
 using Business.Abstract;
-using Core.Utilities.Responses;
+using Core.Exceptions;
 using Core.Utilities.Security.Token.Jwt;
 using DataAccess.Abstracts;
 using DataAccess.Dtos;
 using DataAccess.Entities;
+using static Core.Models.BaseResponseModel;
 
 namespace Business.Concreate
 {
@@ -19,7 +20,7 @@ namespace Business.Concreate
             this.jwtService = jwtService;
             this.userRepository = userRepository;
         }
-        public async Task<DataResponseModel<UserLoginResponseDto>> InsertAsync(UserInsertDto userInsertDto)
+        public async Task<ServiceResponse<UserLoginResponseDto>> InsertAsync(UserInsertDto userInsertDto)
         {
             bool usernameIsUnique = await userRepository.UsernameIsUniqueAsync(userInsertDto.Username);
             if (usernameIsUnique)
@@ -30,11 +31,11 @@ namespace Business.Concreate
                 {
                     var userLoginDto = mapper.Map<UserLoginResponseDto>(user);
                     userLoginDto.Token = jwtService.CreateToken(user.Id);
-                    return new DataResponseModel<UserLoginResponseDto>(userLoginDto);
+                    return new ServiceResponse<UserLoginResponseDto>(userLoginDto);
                 }
-                else throw new Exception("User registeration error !");
+                else throw new InternalServerException("User registeration error !");
             }
-            else throw new Exception("Username must be unique !");
+            else throw new BadRequestException("Username must be unique !");
         }
     }
 }

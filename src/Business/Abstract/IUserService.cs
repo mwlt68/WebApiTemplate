@@ -1,10 +1,10 @@
-﻿using Core.Utilities.Responses;
-using DataAccess.Dtos;
+﻿using DataAccess.Dtos;
+using static Core.Models.BaseResponseModel;
 
 namespace Business.Abstract
 {
     public interface IUserService
     {
-        public Task<DataResponseModel<UserLoginResponseDto>> InsertAsync(UserInsertDto userInsertDto);
+        public Task<ServiceResponse<UserLoginResponseDto>> InsertAsync(UserInsertDto userInsertDto);
     }
 }

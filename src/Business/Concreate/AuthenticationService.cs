@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Business.Abstract;
 using Core.Utilities.Helpers;
-using Core.Utilities.Responses;
 using Core.Utilities.Security.Token.Jwt;
 using DataAccess.Abstracts;
 using DataAccess.Dtos;
+using static Core.Models.BaseResponseModel;
 
 namespace Business.Concreate
 {
@@ -19,7 +19,7 @@ namespace Business.Concreate
             this.jwtService = jwtService;
             this.userRepository = userRepository;
         }
-        public async Task<DataResponseModel<UserLoginResponseDto>> AuthenticateAsync(string username, string password)
+        public async Task<ServiceResponse<UserLoginResponseDto>> AuthenticateAsync(string username, string password)
         {
             string hashedPassword = MD5HashHelper.Create(password);
             var user = await userRepository.GetUserAsync(username, hashedPassword);
@@ -27,7 +27,7 @@ namespace Business.Concreate
             {
                 var userLoginDto = mapper.Map<UserLoginResponseDto>(user);
                 userLoginDto.Token = jwtService.CreateToken(user.Id);
-                return new DataResponseModel<UserLoginResponseDto>(userLoginDto);
+                return new ServiceResponse<UserLoginResponseDto>(userLoginDto);
             }
             else throw new KeyNotFoundException("Username or password wrong !");
         }
